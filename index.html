@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>positdev :)</title>
+    <meta name="theme-color"
+          content="#f8f8f8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
     <style>
@@ -19,8 +21,11 @@
     }
 
     body {
-      margin    : 0;
-      font-size : 0;
+      margin              : 0;
+      font-size           : 0;
+      overscroll-behavior : none;
+      overflow            : hidden;
+      background          : #f8f8f8;
     }
 
     #canvas,
@@ -33,9 +38,15 @@
     }
 
     #canvas {
-      z-index    : 0;
-      background : #f8f8f8;
-      cursor     : pointer;
+      z-index : 0;
+      cursor  : pointer;
+    }
+
+    @keyframes canvas-start--entrance {
+      0% {
+        opacity   : 0;
+        transform : scale(1.1);
+      }
     }
 
     #canvas-start {
@@ -45,14 +56,15 @@
       font-size       : 2rem;
       color           : #cccccc;
       pointer-events  : none;
-      transition      : .2s ease;
       padding         : 1rem;
       text-align      : center;
+      transition      : .4s ease;
+      animation       : canvas-start--entrance .4s ease;
     }
 
     #canvas-start.canvas-start--hidden {
       opacity    : 0;
-      transform  : scale(.8);
+      transform  : scale(.95);
       visibility : hidden;
     }
 
@@ -159,7 +171,7 @@
 
       $canvas.addEventListener('click', () => {
         $canvas.innerHTML = '';
-        $canvasStart.classList.remove('canvas-start--hidden');
+        $canvasStart.classList.toggle('canvas-start--hidden');
       });
 
       $canvas.addEventListener('mousemove', ({ pageX, pageY }) => {
